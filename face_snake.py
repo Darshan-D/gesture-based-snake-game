@@ -1,5 +1,5 @@
 """
-Blue Snake 
+Gestured Based Snake Game 
 Prototype 1.1
 
 
