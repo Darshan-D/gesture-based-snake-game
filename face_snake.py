@@ -1,11 +1,8 @@
 """
-Gestured Based Snake Game 
-Prototype 1.1
+Gesture Controlled Snake Game
+Prototype 2
 
-
-Further imporvements that can be made:-
-> Change in the cond for dir change
-> See if optical flow can help
+You only get out when you touch the borders :p
 """
 
 import pygame
@@ -34,19 +31,18 @@ dis_height = 300
 
 #Initializing pygame display
 dis = pygame.display.set_mode((dis_width, dis_height))
-pygame.display.set_caption('NOT a FAce snaKe')
+pygame.display.set_caption('Hisssssssss')
 
 clock = pygame.time.Clock()
 
 #Size of Snake and it's speed
 snake_block = 10
-snake_speed = 20
+snake_speed = 25
  
 font_style = pygame.font.SysFont("bahnschrift", 15)
 score_font = pygame.font.SysFont("comicsansms", 20)
 
 
-flag = "start"
  
  
 def Your_score(score):
@@ -86,7 +82,7 @@ def pause():
                     paused = False
     
     
-def gameLoop(flag):
+def gameLoop():     
     #Main game loop
     
     #Initialize basic parameters
@@ -105,6 +101,11 @@ def gameLoop(flag):
     #Choose x and y coordinate of the foood randomly
     foodx = round(random.randrange(0, dis_width - snake_block)/ 10.0) * 10.0
     foody = round(random.randrange(0, dis_height - snake_block)/ 10.0) * 10.0
+    
+    
+    #Normalizing the y value so that object doesn't go out of the frame while controling the snake
+    while foody < dis_height/3.5:
+        foody = round(random.randrange(0, dis_height - snake_block)/ 10.0) * 10.0    
 
     
     while not game_over:
@@ -127,8 +128,8 @@ def gameLoop(flag):
                         game_close = False
                 
                     if event.key == pygame.K_c:
-                        flag = "start"
-                        gameLoop(flag)
+                        gameLoop()
+                    
 
         #Read from the input video stream
         _, frame = cap.read()
@@ -160,32 +161,28 @@ def gameLoop(flag):
         #Compare x  and y coordinates with previous x and y coordinates 
         #to determine the direction of the movement
         
-        if cx < x1 and abs(cx - x1) >= threshold and flag != "left":
+        if cx < x1 and abs(cx - x1) >= threshold:
             print("Left")
             x1_change = -snake_block
             y1_change = 0
-            flag = "left"
             
             
-        elif cx > x1 and abs(cx - x1) >= threshold and flag != "right":
+        elif cx > x1 and abs(cx - x1) >= threshold:
             print("Right")
             x1_change = snake_block
             y1_change = 0
-            flag = "right"
             
             
-        elif cy < y1 and abs(cy - y1) >= threshold and flag != "up":
+        elif cy < y1 and abs(cy - y1) >= threshold:
             print("Up")
             y1_change = -snake_block
             x1_change = 0
-            flag = "up"
             
             
-        elif cy > y1 and abs(cy - y1) >= threshold and flag != "down":
+        elif cy > y1 and abs(cy - y1) >= threshold:
             print("Down")
             y1_change = snake_block
             x1_change = 0
-            flag = "down"
             
         if x1 == x1_change and y1 == y1_change:
             print("No change in dir")
@@ -218,6 +215,11 @@ def gameLoop(flag):
         if x1 == foodx and y1 == foody:
             foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
             foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+            
+            #Normalizing the y value so that object doesn't go out of the frame while controling the snake
+            while foody < dis_height/3.5:
+                foody = round(random.randrange(0, dis_height - snake_block)/ 10.0) * 10.0    
+                
             Length_of_snake += 1
         
             
@@ -229,4 +231,4 @@ def gameLoop(flag):
     pygame.quit()
  
 #Calling the game loop function
-gameLoop(flag)
+gameLoop()
