@@ -1,11 +1,16 @@
 """
 This script contains all the functions that are dependent on Open CV
+
+>> More functions to be added soon
 """
 
 import cv2
 import numpy as np
 
 def centre_tracked(frame):
+#Arguments - input frame
+#Returns - Centre co-ordinates of the largest contour of given color
+    
     
     #Flipping the image just to make it not inverted
     frame = cv2.flip(frame, 1)
@@ -18,6 +23,7 @@ def centre_tracked(frame):
     hsv = cv2.cvtColor(blur_frame, cv2.COLOR_BGR2HSV)
     
     #Setting the range for blue color in HSV color space
+    #Change this as per the color you want to track
     lower_value=np.array([100, 50, 50])
     upper_value=np.array([130, 255, 255])
     
@@ -56,13 +62,15 @@ def centre_tracked(frame):
     #Finding the centre of the contour having largest area
     M = cv2.moments(c)
     cX = int(M["m10"] / M["m00"])
-    cY = int(M["m01"] / M["m00"])  
+    cY = int(M["m01"] / M["m00"]) 
+    print("Cx:", cX)
+    print("Cy:", cY)
     
     #Drawing the max area contour and its centre on frame along with few lines for UI
     cv2.drawContours(frame_copy, contours, maxcnt, (0,0,255), 2)
     cv2.circle(frame_copy, (cX, cY), 4, (0, 0, 255), -1)
     
-    #Divided by 8th part of the widht
+    #Divided by 8th part of the width
     #Vertical Lines
     
     # ~~Disabled currently
