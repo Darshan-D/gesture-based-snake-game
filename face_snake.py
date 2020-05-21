@@ -31,7 +31,7 @@ dis_height = 300
 
 #Initializing pygame display
 dis = pygame.display.set_mode((dis_width, dis_height))
-pygame.display.set_caption('Hisssssssss')
+pygame.display.set_caption('Snake Game')
 
 clock = pygame.time.Clock()
 
@@ -41,7 +41,7 @@ snake_speed = 25
 
 font_style = pygame.font.SysFont("bahnschrift", 15)
 score_font = pygame.font.SysFont("comicsansms", 20)
-
+quote_font = pygame.font.SysFont("comicsansms", 12)
 
 
 
@@ -116,7 +116,9 @@ def gameLoop():
             dis.fill(black)
             message("You Lost! Press C-Play Again or Q-Quit", green)
             value = score_font.render("Your Score: " + str(Length_of_snake - 1), True, green)
+            quote = quote_font.render("--What do Programmers Dance To ? ... Algorhythms", True, (255,255,255))
             dis.blit(value, [0, 0])
+            dis.blit(quote, [58, 150])
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -183,9 +185,6 @@ def gameLoop():
             print("Down")
             y1_change = snake_block
             x1_change = 0
-
-        elif x1 == x1_change and y1 == y1_change:
-            print("No change in dir")
 
         else:
             print("No change detected \nUsing Previous Change")
