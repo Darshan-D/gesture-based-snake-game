@@ -4,7 +4,7 @@ We use OpenCV to track the motion of an object and then control the snake accord
 In this project we control snake from the classic snake game using the gesture of an object of specific color.
 If the centre of the object moves left relative to the prevous centre position the snake will also move left.
 
-# Pipeline
+## Pipeline
 1. Detect the object on the basis of color
 2. Find the centre of the object
 3. Compare this centre with previous centre to find the change in direction
