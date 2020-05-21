@@ -69,6 +69,7 @@ def centre_tracked(frame):
     cv2.drawContours(frame_copy, contours, maxcnt, (0,0,255), 2)
     cv2.circle(frame_copy, (cX, cY), 4, (0, 0, 255), -1)
     
+    
     #Rendering centre co-ordinates on screen
     font = cv2.FONT_HERSHEY_SIMPLEX
     info = "Centre Co-ordinates"
