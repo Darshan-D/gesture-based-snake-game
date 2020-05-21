@@ -153,7 +153,7 @@ def gameLoop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     mesg = score_font.render("PAUSED", True, black)
-                    dis.blit(mesg, [300, 275])
+                    dis.blit(mesg, [295, 270])
                     pygame.display.update()
                     pause()
 

@@ -63,12 +63,26 @@ def centre_tracked(frame):
     M = cv2.moments(c)
     cX = int(M["m10"] / M["m00"])
     cY = int(M["m01"] / M["m00"]) 
-    print("Cx:", cX)
-    print("Cy:", cY)
+    
     
     #Drawing the max area contour and its centre on frame along with few lines for UI
     cv2.drawContours(frame_copy, contours, maxcnt, (0,0,255), 2)
     cv2.circle(frame_copy, (cX, cY), 4, (0, 0, 255), -1)
+    
+    #Rendering centre co-ordinates on screen
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    info = "Centre Co-ordinates"
+    cv2.putText(frame_copy, info, (5,450), font, 0.5, (255,255,255), 1, cv2.LINE_AA)
+    centre = "X: " + str(cX) + "  Y: " + str(cY)
+    cv2.putText(frame_copy, centre, (5,470), font, 0.5, (255,255,255), 1, cv2.LINE_AA)
+    
+    
+    #Rendering Contour Area on screen
+    info = "Contour Area"
+    cv2.putText(frame_copy, info, (530,450), font, 0.5, (255,255,255), 1, cv2.LINE_AA)
+    cntArea = str(maxcntArea)
+    cv2.putText(frame_copy, cntArea, (530,470), font, 0.5, (255,255,255), 1, cv2.LINE_AA)
+    
     
     #Divided by 8th part of the width
     #Vertical Lines
