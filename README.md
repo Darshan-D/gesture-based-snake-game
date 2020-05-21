@@ -11,12 +11,12 @@ If the centre of the object moves left relative to the prevous centre position t
 4. Change the direction of the snake accordingly
 
 
-- Dependencies
+### Dependencies
 1. OpenCV
 2. Pygame
 3. Numpy
 
 
-- Note
-1. As of now it by default works with blue color, you can change which color it detects by changing the code
-2. The snake can't eat itself. This is made like this because the centre co-ordinates won't be steady due to noise.
+### Note
+- As of now it by default works with blue color, you can change which color it detects by changing the code
+- The snake can't eat itself. This is made like this because the centre co-ordinates won't be steady due to noise.
