@@ -1,7 +1,5 @@
 """
 This script contains all the functions that are dependent on Open CV
-
->> More functions to be added soon
 """
 
 import cv2
@@ -96,3 +94,30 @@ def centre_tracked(frame):
     cv2.imshow("Tracked", frame_copy)
     
     return(cX, cY) 
+
+#Experimental
+def kalman_init():
+#Arguments - None
+#Returns - Initial Values of P_k, R, I
+
+    P_k_prev = np.array([[4, 0], [0, 4]])
+    X_k = np.array([[200], [150]])
+    I = np.array([[1, 0], [0, 1]])
+    
+    return P_k_prev, I, X_k
+
+#Experimental
+def kalman_track(pcx, pcy, P_k_prev, I, X_k):
+#Arguments - pcx, pcy, P_k_prev, R, I
+#Returns - Expected centre co-ordinates of the largest contour of given color
+
+    R = np.array([[9, 0], [0, 9]])
+    Y = np.array([[pcx], [pcy]]) 
+    K = (P_k_prev)/(P_k_prev - R)
+    X_f = X_k + np.dot(K, (Y - X_k))
+    P_k = np.dot((I - K), P_k_prev)
+    P_k_prev = P_k
+    X_k = X_f    
+    
+    return X_f, X_k
+
